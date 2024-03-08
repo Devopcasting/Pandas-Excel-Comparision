@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{title}}</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <style>
+        .table-responsive {
+            max-height: 500px; /* Set max height of the table container */
+            overflow-y: auto; /* Enable vertical scroll */
+            overflow-x: auto; /* Enable horizontal scroll */
+        }
+        .table-responsive table {
+            width: 100%;
+        }
+        .table-container {
+            display: flex;
+            overflow-x: auto; /* Enable horizontal scroll for the container */
+        }
+        .table-container .table-responsive {
+            flex: 0 0 auto; /* Allow the table containers to shrink */
+            margin-right: 10px; /* Add some space between tables */
+        }
+        .square-badge {
+            border-radius: 0; /* Remove rounded corners */
+        }
+    </style>
+</head>
+<body>
+    <div class="col-lg-8 mx-auto p-3 py-md-3">
+        <header class="d-flex align-items-center pb-3 mb-5 border-bottom">
+          <a href="#" class="d-flex align-items-center text-dark text-decoration-none">
+            <img src="/static/images/logo.jpeg" width="64" height="64" class="p-1">
+            <span class="fs-4">Document Comparison and Analysis (Demo)</span>
+          </a>
+        </header>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col">
+                    <div class="table-container">
+                        <!-- First Table -->
+                        <div class="table table-responsive">
+                            <span class="badge bg-primary square-badge">Excel Document Path</span><span class="badge bg-success square-badge">{{file1}}</span><br>
+                            <span class="badge bg-primary square-badge">Excel Sheet Number</span><span class="badge bg-success square-badge">{{file1_sheet_number}}</span>
+                            <table class="table-sm table-bordered mt-2">
+                                <thead class="table-dark">
+                                    <tr>
+                                        {% for column in data1[0].keys() %}
+                                            <th>{{ column }}</th>
+                                        {% endfor %}
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for row in data1 %}
+                                        <tr {% if loop.index0 in highlighted_rows %}class="table-warning"{% endif %}>
+                                            {% for value in row.values() %}
+                                                <td>{{ value }}</td>
+                                            {% endfor %}
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="table-container">
+                        <div class="table table-responsive">
+                            <!-- Second Table -->
+                            <span class="badge bg-primary square-badge">Excel Document Path</span><span class="badge bg-success square-badge">{{file2}}</span><br>
+                            <span class="badge bg-primary square-badge">Excel Sheet Number</span><span class="badge bg-success square-badge">{{file2_sheet_number}}</span>
+                            <table class="table-sm table-bordered mt-2">
+                                <thead class="table-dark">
+                                    <tr>
+                                        {% for column in data2[0].keys() %}
+                                            <th>{{ column }}</th>
+                                        {% endfor %}
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for row in data2 %}
+                                        <tr {% if loop.index0 in highlighted_rows %}class="table-warning"{% endif %}>
+                                            {% for value in row.values() %}
+                                                <td>{{ value }}</td>
+                                            {% endfor %}
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer class="footer mt-auto py-3 bg-light">
+            <div class="container">
+              <span class="text-muted">Copyright 2021 Computhink, Inc. | All Rights Reserved | TERMS OF USE | PRIVACY POLICY</span>
+            </div>
+        </footer>
+    </div>
+    <!-- Bootstrap JS (optional) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+</html>
