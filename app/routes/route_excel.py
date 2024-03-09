@@ -1,7 +1,6 @@
 import os
 from fastapi import APIRouter, HTTPException, Request
 from fastapi.templating import Jinja2Templates
-from pydantic import BaseModel
 from urllib.parse import unquote
 from openpyxl import load_workbook
 import pandas as pd
@@ -9,11 +8,6 @@ import pandas as pd
 excel_router = APIRouter()
 templates = Jinja2Templates(directory=r"app\templates")
 
-
-# Pydantic for Excel Sheets Documents
-class ExcelFiles(BaseModel):
-    file1_path: str
-    file2_path: str
 
 # Check if sheet is blank
 def is_sheet_blank(file_path: str, sheet_number: int) -> bool:
@@ -112,6 +106,4 @@ async def compare_excel(request: Request, file_url1: str, file_url2: str, file1_
     return templates.TemplateResponse("compare_excel.html", {"request": request, "data1": table1, "data2": table2, 
                                                              "highlighted_rows": highlighted_rows, 
                                                              "title": "Contentverse Document Comparision", 
-                                                             "file1":path_file1, "file2": path_file2,
-                                                              "file1_sheet_number": file1_sheet_number,
-                                                               "file2_sheet_number": file2_sheet_number })
+                                                             "file1":path_file1, "file2": path_file2,"file1_sheet_number": file1_sheet_number,"file2_sheet_number": file2_sheet_number })
