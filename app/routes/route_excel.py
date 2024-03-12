@@ -103,6 +103,7 @@ async def compare_excel(request: Request, file_url1: str, file_url2: str, file1_
 
     # Example Path
     # http://localhost:8000/compare_excel/?file_url1=C%3A%5CUsers%5CPrashant Pokhriyal%5CDownloads%5CLab13%5Cfile1.xlsx&file_url2=C%3A%5CUsers%5CPrashant Pokhriyal%5CDownloads%5CLab13%5Cfile2.xlsx
+    # http://localhost:8000/compare_excel?file_url1=D%3A%5CLab8%5Cuploads%5Cfile1.xlsx&file_url2=D%3A%5CLab8%5Cuploads%5Cfile2.xlsx&file1_sheet_number=2&file2_sheet_number=1
     return templates.TemplateResponse("compare_excel.html", {"request": request, "data1": table1, "data2": table2, 
                                                              "highlighted_rows": highlighted_rows, 
                                                              "title": "Contentverse Document Comparision", 
